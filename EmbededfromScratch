@@ -1,0 +1,64 @@
+1) cargo install cargo-generate
+2) cargo generate --git https://github.com/rust-embedded/cortex-m-quickstart
+   
+ Project Name: Ask Your project name Enter it here
+ Creating project called `app`...
+ Done! New project created /tmp/app
+
+
+3)Enter Your App Location : cd /tmp/app
+
+
+In Cargo.toml
+4) [package]
+authors = ["Your name Here"] 
+edition = "2018"
+name = "Project-name-here" 
+version = "0.1.0"
+
+# ..
+
+[[bin]]
+name = "Project-name-here" 
+test = false
+bench = false
+
+
+name in package and bin should Be same else You will face errors
+
+5)uncommit the libraries mentioned Below which are under [dependencies]
+cortex-m = "0.6.0"
+cortex-m-rt = "0.6.10"
+cortex-m-semihosting = "0.3.3"
+panic-halt = "0.2.0"
+panic-itm = "0.4.1"
+
+6)uncommit the libraries mentioned Below which are under [dependencies.stm32f3] as well
+ features = ["stm32f303", "rt"]
+ version = "0.7.1"
+
+
+
+7)goto .cargo/config
+commit everything except lines:
+1)  [target.thumbv7em-none-eabihf]
+9)  runner = "gdb-multiarch -q -x openocd.gdb"
+12) rustflags = [
+14) "-C", "link-arg=-Tlink.x",
+26) ]
+28) [build]
+33) target = "thumbv7em-none-eabihf" 
+
+
+8) cargo build
+if it sucessfully build  Great else Check the previous Steps.
+
+
+
+
+
+
+
+
+
+
